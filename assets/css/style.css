@@ -9,9 +9,9 @@ body {
 	background-color: #B3DDF2;
 }
 
-/** {
-	color: #FF0000!important;
-}*/
+* {
+	color: #3c3d41!important;
+}
 
 main {
     flex: 1 0 auto;
