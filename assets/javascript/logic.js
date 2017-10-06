@@ -33,23 +33,13 @@ $(document).ready(function(){ // everything goes between these
 		accessToken: 'pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ'
 	}).addTo(mymap);
 
-	var potholeOpen = new L.Icon({
-      iconUrl: 'assets/images/pothole_image.png',
+	var redIcon = new L.Icon({
+      iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-orange.png',
       shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-
-  })
-
-   var potholeClosed = new L.Icon({
-        iconUrl: 'assets/images/pothole_image.png',
-      	shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      	iconSize: [25, 41],
-      	iconAnchor: [12, 41],
-      	popupAnchor: [1, -34],
-      	shadowSize: [41, 41]
+      shadowSize: [41, 41]
     });
 
     for(var i =0 ; i < data.length; i++){
@@ -58,13 +48,16 @@ $(document).ready(function(){ // everything goes between these
         var dataLong = data[i].longitude;
         console.log(data[i].longitude);
         //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
-        L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap);
+        L.marker([dataLat, dataLong], {icon: redIcon}).addTo(mymap);
     }
 
-
 }); // $(document).ready(function(){});
-});
- 
+
+	});
+
+	
+	
+// 
 // take string from user entry and .toUppercase 
 //create for loop through the "street address" of pothole information and see 
 //equal to user entry
