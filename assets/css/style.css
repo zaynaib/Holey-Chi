@@ -1,6 +1,7 @@
-html {
+html,
+body {
 	position: relative;
-	min-height: 100%;
+	height: 100%;
 }
 
 body {
@@ -8,6 +9,6 @@ body {
 }
 
 #mapid {
-	height: 50em;
+	height: 100%;
 
 }
