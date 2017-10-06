@@ -1,4 +1,6 @@
 $(document).ready(function(){ // everything goes between these
+	var windowHeight = $(window).height();
+
 	$(".button-collapse").sideNav();
 
 	$.ajax({
@@ -14,7 +16,7 @@ $(document).ready(function(){ // everything goes between these
 		console.log(data);
 	});
 
-	var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+	var mymap = L.map('mapid').setView([51.505, -0.09], 15);
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
