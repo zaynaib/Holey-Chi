@@ -1,36 +1,27 @@
-html,
-body {
-	position: relative;
-	height: 100%;
-}
-
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
 }
 
+
+* {
+	color: #3c3d41!important;
+}
+
 main {
     flex: 1 0 auto;
 }
 
-/*nav {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: auto;
-	min-height: 60px;
+.footer-copyright {
+	background-color: rgba(255,0,0,1)
 }
 
-footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: auto;
-	min-height: 60px;
-}*/
+.nav-wrapper,
+.page-footer {
+	background-color: #B3DDF2;
+}
 
 #mapid {
 	height: 100%;
-
 }

@@ -18,6 +18,7 @@ $(document).ready(function(){ // everything goes between these
 		console.log(data);
 	});
 
+	
 	var mymap = L.map('mapid',{
 		trackResize: true,
 		dragging: true,
@@ -25,6 +26,7 @@ $(document).ready(function(){ // everything goes between these
 		zoomAnimation: true,
 		markerZoomAnimation: true
 	}).setView([41.8781, -87.6298], 15);
+
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -34,3 +36,8 @@ $(document).ready(function(){ // everything goes between these
 	}).addTo(mymap);
 
 }); // $(document).ready(function(){});
+
+// 
+// take string from user entry and .toUppercase 
+//create for loop through the "street address" of pothole information and see 
+//equal to user entry
