@@ -15,7 +15,7 @@ main {
 
 .footer-copyright {
 	background-color: rgba(255,0,0,1)
-}
+}s
 
 .nav-wrapper,
 .page-footer {
@@ -24,4 +24,10 @@ main {
 
 #mapid {
 	height: 100%;
+}
+
+#flag {
+	position: absolute;
+	top: 100;
+	right: 20;
 }
