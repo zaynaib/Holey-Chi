@@ -10,7 +10,7 @@ $(document).ready(function(){ // everything goes between these
 		}
 
 	}).done(function(data) {
-		alert("Retrieved " + data.length + " records from the dataset!");
+		console.log("Retrieved " + data.length + " records from the dataset!");
 		console.log(data);
 	});
 
