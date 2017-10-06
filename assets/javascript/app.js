@@ -7,7 +7,7 @@ $(document).ready(function(){ // everything goes between these
 		url: "https://data.cityofchicago.org/resource/787j-mys9.json",
 		type: "GET",
 		data: {
-			"$limit" : 5,
+			"$limit" : 1000,
 			"$$app_token" : "rWk97H84NMWrBWcdiG4IvjTjX"
 		}
 
@@ -34,8 +34,9 @@ $(document).ready(function(){ // everything goes between these
 	}).addTo(mymap);
 
 	var potholeOpen = new L.Icon({
-      iconUrl: 'assets/images/pothole_image.png',
+      iconUrl: 'assets/images/icon-green.png',
       shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
@@ -44,7 +45,7 @@ $(document).ready(function(){ // everything goes between these
   })
 
    var potholeClosed = new L.Icon({
-        iconUrl: 'assets/images/pothole_image.png',
+        iconUrl: 'assets/images/icon-red.png',
       	shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
       	iconSize: [25, 41],
       	iconAnchor: [12, 41],
@@ -57,8 +58,29 @@ $(document).ready(function(){ // everything goes between these
       console.log(data[i].latitude);
         var dataLong = data[i].longitude;
         console.log(data[i].longitude);
+        var dataStatus = data[i].status;
+        console.log(data[i].status);
+        
+        var dataAddress = data[i].street_address;
+        console.log(data[i].street_address);
+        var dataAction = data[i].most_recent_action;
+        console.log(data[i].most_recent_action);
+
+        if (dataStatus === "Completed") {
+        	console.log([dataLat, dataLong], "this  is the info")
+        	L.marker([dataLat, dataLong], {icon: potholeClosed}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
+            .openPopup();
+
+        }
+        else {
+        	 L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
+            .openPopup();
+        }
+
         //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
-        L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap);
+       
+        
+
     }
 
 
