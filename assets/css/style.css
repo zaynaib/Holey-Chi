@@ -13,9 +13,13 @@ main {
     flex: 1 0 auto;
 }
 
+body {
+	position: relative;
+}
+
 .footer-copyright {
 	background-color: rgba(255,0,0,1)
-}s
+}
 
 .nav-wrapper,
 .page-footer {
@@ -24,10 +28,16 @@ main {
 
 #mapid {
 	height: 100%;
+	z-index: 1;
 }
 
 #flag {
+	opacity: 0.7;
 	position: absolute;
-	top: 100;
-	right: 20;
+	top: 70px;
+	right: 10px;
+	width: 5%;
+	min-width: 30px;
+	height: auto;
+	z-index: 2;
 }
