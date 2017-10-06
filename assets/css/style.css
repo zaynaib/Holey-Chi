@@ -5,8 +5,30 @@ body {
 }
 
 body {
-	background: lightblue;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
+main {
+    flex: 1 0 auto;
+}
+
+/*nav {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: auto;
+	min-height: 60px;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: auto;
+	min-height: 60px;
+}*/
 
 #mapid {
 	height: 100%;
