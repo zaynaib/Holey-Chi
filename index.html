@@ -5,7 +5,7 @@
 	<title>Holey Chi</title>
 
 	<!-- Favicon -->
-	<link rel='icon' href='assets/images/favicon-dark.png' type='image/x-icon'/ >
+	<link rel='icon' href='assets/images/favicon-outside-transparent.png' type='image/x-icon'/ >
 
 	<!-- jQuery Link -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -44,36 +44,41 @@
 		<nav>
 			<div class="nav-wrapper">
 				<a href="#!" class="brand-logo">Holey Chi!</a>
+				
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+				</ul>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="#">About</a></li>
 					<li><a href="#">Meet the Crew</a></li>
 					<li><a href="#">Contact Us</a></li>
-					<li><a href="#">Mobile</a></li>
-				</ul>
-				<ul class="side-nav" id="mobile-demo">
-					<li><a href="sass.html">Sass</a></li>
-					<li><a href="badges.html">Components</a></li>
-					<li><a href="collapsible.html">Javascript</a></li>
 					<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank">Report a Pothole</a></li>
 				</ul>
+				<ul class="side-nav" id="mobile-demo">
+					<li><a href="#">About</a></li>
+					<li><a href="#">Meet the Crew</a></li>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank">Report a Pothole</a></li>
+				</ul>
+				<a href="#"><i class="right material-icons">search</i></a>
 			</div>
 		</nav>
 	</header>
 	
-	
+	<!-- Map -->
 	<main class="responsive-image" id="mapid"></main>
 
+	<!-- Map Watermark -->
 	<img id="flag" src="assets/images/Flag_of_Chicago_red.png">
 
+	<!-- Search Box -->
 	<div class="row" id="main-action">
 		<div class="col s12">
 			<div class="card blue lighten-5">
 				<div class="card-content">
-					<!--<form class="input-field">
+					<form class="input-field">
 						<input id="search" type="text" class="validate">
 						<label for="search">Search</label>
-					</form>-->
+					</form>
 				
 					<ul class="collapsible" data-collapsible="accordion">
 						<li>
@@ -88,7 +93,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> <!-- End of Search Box -->
 
     <!-- <li>
       <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
