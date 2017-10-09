@@ -50,6 +50,8 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
   // show/hide search box on search button click
   $("#show-search-box").on("click", searchBoxVisibility);
 
+  $("#search-menu").tabs({"swipeable": true});
+
 }); // $(document).ready(function(){});
 
 
@@ -207,7 +209,7 @@ function centerLeafletMapOnMarker(map, marker) {
   map.fitBounds(markerBounds);
 }
 
-function searchBoxVisibility() {
+function searchBoxVisibility(event) {
   var mainAction = document.getElementById("main-action");
   if (mainAction.style.display === "none") {
     mainAction.style.display = "block";
