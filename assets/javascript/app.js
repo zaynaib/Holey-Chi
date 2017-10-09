@@ -5,9 +5,16 @@
 //http://leafletjs.com/examples/zoom-levels/
 //https://teamtreehouse.com/library/ajax-basics
 //http://leafletjs.com/reference-1.2.0.html#interactive-layer
+//https://stackoverflow.com/questions/38768576/in-firebase-when-using-push-how-do-i-get-the-unique-id-and-store-in-my-databas
 
+
+
+//zipcodeZoom
+//http://techslides.com/zoom-into-us-zip-codes-in-leaflet-map
+//https://www.udacity.com/course/firebase-in-a-weekend-by-google-android--ud0352
 
 //configure the database
+//database tutorial https://www.tutorialspoint.com/firebase/firebase_data.htm
 var config = {
   apiKey: "AIzaSyAo3hU0OhP2Sj7cwQSnpOQSomz72WhPyO0",
   authDomain: "project-1-26662.firebaseapp.com",
@@ -21,12 +28,42 @@ var config = {
 firebase.initializeApp(config);
 
 
+
+
 //create a reference to the database
 var database = firebase.database();
+var ref = firebase.database().ref('points');
+
+//intializeMap
+var mymap = L.map('mapid',{
+      trackResize: true,
+      dragging: true,
+      doubleClickZoom: true,
+      zoomAnimation: true,
+      markerZoomAnimation: true
+    }).setView([41.8781, -87.6298], 15);
+
+
+
+
+
+//grab the user input call to the address in the query string
+
+//https://data.cityofchicago.org/resource/787j-mys9.json?location_address=FOO
+//https://dev.socrata.com/foundry/data.cityofchicago.org/787j-mys9
+
+
+//https://www.mapbox.com/mapbox.js/example/v1.0.0/marker-radius-search/
+//https://www.mapbox.com/mapbox.js/api/v2.2.1/l-latlng/
+
+//if map lat and long are in this bound then map
 
 
 $(document).ready(function(){ //manipulate the DOM once the page is loaded
   var windowHeight = $(window).height();
+
+
+
 
   $(".button-collapse").sideNav();
 
@@ -43,6 +80,7 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
         userSearch = $("#search").val();
         userSearch = userSearch.toUpperCase();
         console.log(userSearch);
+        userMatch(userSearch,mymap);
 
       }
   }); //end of input listner
@@ -51,7 +89,6 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
   $("#show-search-box").on("click", searchBoxVisibility);
 
 }); // $(document).ready(function(){});
-
 
 
 
@@ -69,16 +106,6 @@ function buildMap() {
 
     //console.log("Retrieved " + data.length + " records from the dataset!");
     console.log(data);
-
-    //initalize map
-    var mymap = L.map('mapid',{
-      trackResize: true,
-      dragging: true,
-      doubleClickZoom: true,
-      zoomAnimation: true,
-      markerZoomAnimation: true
-    }).setView([41.8781, -87.6298], 15);
-
 
     //create and add map layer
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -141,7 +168,7 @@ function buildMap() {
 
       //check to see if the address is defined
       if(dataAddress === undefined){
-        dataAdress = "undefined";
+        dataAddress = "undefined";
       }
       //console.log(data[i].street_address);
 
@@ -150,9 +177,9 @@ function buildMap() {
 
       //check to see if the pothole most recent action is defined
       if(dataAction === undefined){
-        dataAction = "undefined";
+        dataAction = "none";
       }
-      console.log("This is data action is set " +data[i].most_recent_action);
+      //console.log("This is data action is set " +data[i].most_recent_action);
 
       //if the pothole status is completed show green else show red
       if (dataStatus === "Completed") {
@@ -172,14 +199,32 @@ function buildMap() {
      //write data into firebase database
      //write to the firebase database
      //console.log("This is data Action " + dataAction );
-     database.ref().push({
+
+
+     /*TO DO
+     Learn how to clear the database
+     Learn how to check for unique data entry so it won't add everytime the page loads
+     Learn how to put database information into a global array
+
+    */
+
+    
+  
+    
+     var objectKey = i;
+     //if(objectKey does not exsist in database  push)
+     database.ref("/points/").push({
       latitude: dataLat,
       longitude: dataLong,
       status: dataStatus,
       address: dataAddress,
+      //dataKey: objectKey,
       potholeAction: dataAction
 
       });//end of database push
+
+      
+      console.log(dataLat, dataLong, dataStatus, dataAction,dataAddress );
 
     }//end of for loop
 
@@ -187,12 +232,52 @@ function buildMap() {
 
 }; // function buildMap(){}
 
+//read in data from firebase
+
+
+function userMatch(match,map){
+  
+database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
+  var newAddress = snapshot.val().address;
+  console.log("Address from the database " + newAddress);
+
+  var newLat =snapshot.val().latitude;
+  console.log("Lat from the database " + newLat);
+
+  var newLong = snapshot.val().longitude ;
+  console.log("Long from the database " + newLong);
+
+  if(newAddress === match){
+    console.log("working");
+   map.setView([newLat, newLong], 15);
+  }
+  
+  //var newPost = snapshot.val().latitude;
+  //console.log("newPost: "+newPost);
+  
+});
+
+}
+
+
+//var playersKey = playersRef.key();
+//console.log(playersKey);
+//map out points within an area
+
+//get longitude and latitude from user click
+//add a latbound
+//latlngbound
+
+//map all those points in map bound
+//if lat or long is insde the bounds then map
+
+//https://stackoverflow.com/questions/33600480/how-to-check-if-points-are-within-radius-with-leaflet-javascript
+
+//retrieve data from the firebase database
 
 
 
-// take string from user entry and .toUppercase 
-//create for loop through the "street address" of pothole information and see 
-//equal to user entry
+
 
 //http://leafletjs.com/reference-1.2.0.html#map-methods-for-modifying-map-state
 //setview will zoom to a specific point
