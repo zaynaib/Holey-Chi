@@ -46,21 +46,22 @@
 
 	<header>
 		<nav>
+
 			<div class="nav-wrapper container">
-				<a href="#!" class="brand-logo grey-text text-darken-3">Holey Chi!</a>
+				<a href="index.html" class="brand-logo grey-text text-darken-3">Holey Chi!</a>
 				
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons grey-text text-darken-3">menu</i></a>
 			</ul>
 			<ul class="right hide-on-med-and-down">
-				<li><a href="#" class="grey-text text-darken-3">About</a></li>
-				<li><a href="#" class="grey-text text-darken-3">Meet the Crew</a></li>
-				<li><a href="#" class="grey-text text-darken-3">Contact Us</a></li>
+				<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
+				<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
+				<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
 				<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
 			</ul>
 			<ul class="side-nav" id="mobile-demo">
-				<li><a href="#" class="grey-text text-darken-3">About</a></li>
-				<li><a href="#" class="grey-text text-darken-3">Meet the Crew</a></li>
-				<li><a href="#" class="grey-text text-darken-3">Contact Us</a></li>
+				<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
+				<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
+				<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
 				<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
 			</ul>
 			<a href=""><i class="right material-icons grey-text text-darken-3" id="show-search-box">search</i></a>
@@ -74,7 +75,33 @@
 <!-- Map Watermark -->
 <img id="flag" src="assets/images/Flag_of_Chicago_red.png">
 
-<!-- Search Box -->
+<!-- Collapsible Search Box -->
+<div class="row" id="main-action">
+	<div class="col s12">
+		<div class="card blue lighten-5">
+			<div class="card-content">
+				<form class="input-field">
+					<input id="search" type="text" class="validate">
+					<label for="search">Search</label>
+				</form>
+
+				
+				<ul class="collapsible" data-collapsible="accordion">
+					<li>
+						<div class="collapsible-header blue lighten-5"><i class="material-icons">history</i>My History</div>
+						<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+					</li>
+					<li>
+						<div class="collapsible-header blue lighten-5"><i class="material-icons">people</i>What Are Others Searching?</div>
+						<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div> <!-- End of Search Box -->
+
+<!-- Tabbed Search Box -->
 <!-- <div class="row" id="main-action">
 	<div class="col s12">
 		<div class="card blue lighten-5">
