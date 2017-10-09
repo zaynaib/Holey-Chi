@@ -210,6 +210,8 @@ function centerLeafletMapOnMarker(map, marker) {
 }
 
 function searchBoxVisibility(event) {
+  event.preventDefault();
+  
   var mainAction = document.getElementById("main-action");
   if (mainAction.style.display === "none") {
     mainAction.style.display = "block";
