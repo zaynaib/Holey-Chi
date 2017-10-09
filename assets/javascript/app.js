@@ -37,14 +37,14 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
   //grab the user's input
   var userSearch;
   window.addEventListener("keypress", function(event){
-   
-      if(event.which === 13) {
-        event.preventDefault();
+
+    if(event.which === 13) {
+      event.preventDefault();
         //alert('You pressed enter!');
         userSearch = $("#search").val();
         userSearch = userSearch.toUpperCase();
         console.log(userSearch);
-         
+
       }
   }); //end of input listner
 
@@ -173,17 +173,11 @@ function centerLeafletMapOnMarker(map, marker) {
   map.fitBounds(markerBounds);
 }
 
-var searchBoxShowing = false;
-
 function searchBoxVisibility() {
-  if(searchBoxShowing === false) {
-    var searchBoxHTML = '<div class="row" id="main-action"><div class="col s12"><div class="card blue lighten-5"><div class="card-content"><form class="input-field"><input id="search" type="text" class="validate"><label for="search">Search</label></form><ul class="collapsible" data-collapsible="accordion"><li><div class="collapsible-header blue lighten-5"><i class="material-icons">history</i>My History</div><div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div></li><li><div class="collapsible-header blue lighten-5"><i class="material-icons">people</i>What Are Others Searching?</div><div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div></li></ul></div></div></div></div>'
-    $("body").append(searchBoxHTML);
-
-    searchBoxShowing = true;
-  } else if(searchBoxShowing === true) {
-    $("#main-action").remove();
-
-    searchBoxShowing = false;
-  };
+  var mainAction = document.getElementById("main-action")
+  if (mainAction.style.display === "none") {
+    mainAction.style.display = "block";
+  } else {
+    mainAction.style.display = "none";
+  }
 }; // end of function searchBoxVisibility(){}
