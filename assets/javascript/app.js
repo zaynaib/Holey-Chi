@@ -116,23 +116,43 @@ function buildMap() {
 
       //get the latitude
       var dataLat = data[i].latitude;
+      if(dataLat === undefined){
+        dataLat = "undefined";
+      }
       //console.log(data[i].latitude);
 
       //get the longitude
       var dataLong = data[i].longitude;
+      if(dataLong === undefined){
+        dataLong = "undefined";
+      }
       //console.log(data[i].longitude);
 
       //get the status of the pothole request
       var dataStatus = data[i].status;
+
+      if(dataStatus === undefined){
+        dataStatus = "undefined";
+      }
       // console.log(data[i].status);
 
       //get the address of the datapoint   
       var dataAddress = data[i].street_address;
+
+      //check to see if the address is defined
+      if(dataAddress === undefined){
+        dataAdress = "undefined";
+      }
       //console.log(data[i].street_address);
 
       //get the log report of the pothole
       var dataAction = data[i].most_recent_action;
-      //console.log(data[i].most_recent_action);
+
+      //check to see if the pothole most recent action is defined
+      if(dataAction === undefined){
+        dataAction = "undefined";
+      }
+      console.log("This is data action is set " +data[i].most_recent_action);
 
       //if the pothole status is completed show green else show red
       if (dataStatus === "Completed") {
@@ -147,7 +167,21 @@ function buildMap() {
       }
 
       //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
-    }
+
+
+     //write data into firebase database
+     //write to the firebase database
+     //console.log("This is data Action " + dataAction );
+     database.ref().push({
+      latitude: dataLat,
+      longitude: dataLong,
+      status: dataStatus,
+      address: dataAddress,
+      potholeAction: dataAction
+
+      });//end of database push
+
+    }//end of for loop
 
   }); // .done function
 
