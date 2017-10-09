@@ -18,8 +18,12 @@ var config = {
   storageBucket: "",
   messagingSenderId: "1047540056380"
 };
-//firebase.initializeApp(config);
 
+firebase.initializeApp(config);
+
+
+//create a reference to the database
+var database = firebase.database();
 
 
 $(document).ready(function(){ //manipulate the DOM once the page is loaded
@@ -27,20 +31,21 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
 
   $(".button-collapse").sideNav();
 
+  //create the map
   var appMap = buildMap();
 
+  //grab the user's input
   var userSearch;
   window.addEventListener("keypress", function(event){
-
-    if(event.which === 13) {
-      event.preventDefault();
-      //alert('You pressed enter!');
-      userSearch = $("#search").val();
-      userSearch = userSearch.toUpperCase();
-      console.log(userSearch);
-
-      //addressZoom(userSearch);
-    }
+   
+      if(event.which === 13) {
+        event.preventDefault();
+        //alert('You pressed enter!');
+        userSearch = $("#search").val();
+        userSearch = userSearch.toUpperCase();
+        console.log(userSearch);
+         
+      }
   }); //end of input listner
 
   // show/hide search box on search button click
