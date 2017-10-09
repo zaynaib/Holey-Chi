@@ -46,24 +46,25 @@
 
 	<header>
 		<nav>
-			<div class="nav-wrapper">
-				<a href="#!" class="brand-logo grey-text text-darken-3">Holey Chi!</a>
+
+			<div class="nav-wrapper container">
+				<a href="index.html" class="brand-logo grey-text text-darken-3">Holey Chi!</a>
 				
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons grey-text text-darken-3">menu</i></a>
 			</ul>
 			<ul class="right hide-on-med-and-down">
-				<li><a href="#" class="grey-text text-darken-3">About</a></li>
-				<li><a href="#" class="grey-text text-darken-3">Meet the Crew</a></li>
-				<li><a href="#" class="grey-text text-darken-3">Contact Us</a></li>
+				<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
+				<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
+				<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
 				<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
 			</ul>
 			<ul class="side-nav" id="mobile-demo">
-				<li><a href="#" class="grey-text text-darken-3">About</a></li>
-				<li><a href="#" class="grey-text text-darken-3">Meet the Crew</a></li>
-				<li><a href="#" class="grey-text text-darken-3">Contact Us</a></li>
+				<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
+				<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
+				<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
 				<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
 			</ul>
-			<a href="#"><i class="right material-icons grey-text text-darken-3" id="show-search-box">search</i></a>
+			<a href=""><i class="right material-icons grey-text text-darken-3" id="show-search-box">search</i></a>
 		</div>
 	</nav>
 </header>
@@ -74,7 +75,7 @@
 <!-- Map Watermark -->
 <img id="flag" src="assets/images/Flag_of_Chicago_red.png">
 
-<!-- Search Box -->
+<!-- Collapsible Search Box -->
 <div class="row" id="main-action">
 	<div class="col s12">
 		<div class="card blue lighten-5">
@@ -83,6 +84,7 @@
 					<input id="search" type="text" class="validate">
 					<label for="search">Search</label>
 				</form>
+
 				
 				<ul class="collapsible" data-collapsible="accordion">
 					<li>
@@ -99,29 +101,45 @@
 	</div>
 </div> <!-- End of Search Box -->
 
-    <!-- <li>
-      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-  </li> -->
+<!-- Tabbed Search Box -->
+<!-- <div class="row" id="main-action">
+	<div class="col s12">
+		<div class="card blue lighten-5">
+			<div class="card-content">
+				<form class="input-field">
+					<input id="search" type="text" class="validate">
+					<label for="search">Search</label>
+				</form>
+			</div>
+			<div class="card blue lighten-5">
+				<ul id="search-menu" class="tabs tabs-fixed-width blue lighten-5">
+					<li class="tab col"><a class="active collapsible" href="#search-swipe"><i class="material-icons">search</i>Search</a></li>
+					<li class="tab col"><a class="collapsible" href="#my-history"><i class="material-icons">history</i>My History</a></li>
+					<li class="tab col"><a class="collapsible" href="#global-history"><i class="material-icons">people</i>Global History</a></li>
+				</ul>
+
+				<div id="search-swipe" class="col s12 blue lighten-5">Search</div>
+				<div id="my-history" class="col s12 blue lighten-5">History</div>
+				<div id="global-history" class="col s12 blue lighten-5">Global History</div>
+			</div>
+		</div>
+	</div>
+</div> --> <!-- End of Search Box -->
+
+
+<footer class="page-footer">
+	<div class="footer-copyright">
+		<div class="container center">
+			<span class="grey-text text-darken-4">© 2017 <a href="#" class="grey-text text-darken-4">Ali Arfeen</a> | <a href="#" class="grey-text text-darken-4">Zaynaib Giwa</a> | <a href="#" class="grey-text text-darken-4">Kaitlyn Strand</a> | <a href="#" class="grey-text text-darken-4">Jason Terrell</a>
+			</span>
+		</div>
+	</div>
+</footer>
 
 
 
-
-  <footer class="page-footer">
-  	<div class="footer-copyright">
-  		<div class="container">
-  			<span class=" grey-text text-darken-3">© 2017 Copyright Holey Chi Northwestern Project Collaboration</span>
-  			<span class="grey-text right">
-  				<a href="#" class="grey-text text-darken-3">Ali Arfeen</a> | <a href="#" class="grey-text text-darken-3">Zaynaib Giwa</a> | <a href="#" class="grey-text text-darken-3">Kaitlyn Strand</a> | <a href="#" class="grey-text text-darken-3">Jason Terrell</a>
-  			</span>
-  		</div>
-  	</div>
-  </footer>
-
-
-
-  <script type="text/javascript" src="assets/javascript/leaflet.js"></script>
-  <script type="text/javascript" src="assets/javascript/app.js"></script>
+<script type="text/javascript" src="assets/javascript/leaflet.js"></script>
+<script type="text/javascript" src="assets/javascript/app.js"></script>
 
 
 </body>

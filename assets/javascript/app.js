@@ -88,6 +88,8 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
   // show/hide search box on search button click
   $("#show-search-box").on("click", searchBoxVisibility);
 
+  $("#search-menu").tabs({"swipeable": true});
+
 }); // $(document).ready(function(){});
 
 
@@ -196,6 +198,7 @@ function buildMap() {
       //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
 
 
+
      //write data into firebase database
      //write to the firebase database
      //console.log("This is data Action " + dataAction );
@@ -220,6 +223,7 @@ function buildMap() {
       address: dataAddress,
       //dataKey: objectKey,
       potholeAction: dataAction
+
 
       });//end of database push
 
@@ -291,7 +295,9 @@ function centerLeafletMapOnMarker(map, marker) {
   map.fitBounds(markerBounds);
 }
 
-function searchBoxVisibility() {
+function searchBoxVisibility(event) {
+  event.preventDefault();
+  
   var mainAction = document.getElementById("main-action");
   if (mainAction.style.display === "none") {
     mainAction.style.display = "block";
