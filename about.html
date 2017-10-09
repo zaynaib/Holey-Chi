@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Holey Chi</title>
+	<title>Holey Chi - About</title>
 
 	<!-- Favicon -->
 	<link rel='icon' href='assets/images/favicon-outside-transparent.png' type='image/x-icon'/ >
@@ -10,24 +10,12 @@
 	<!-- jQuery Link -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<!-- Mapbox CSS -->
-	<link href='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
-	<!-- Mapbox JavaScript -->
-	<script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
-
-	<!-- Leaflet CSS -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-	integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-	crossorigin=""/>
-	<!-- Leaflet JavaScript -->
-	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-	integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-	crossorigin=""></script>
-
+	
 	<!-- Materialize Icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Materialize CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
 	<!-- Materialize JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
@@ -60,46 +48,35 @@
 					<li><a href="contact.html">Contact Us</a></li>
 					<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank">Report a Pothole</a></li>
 				</ul>
-				<a href="#"><i class="right material-icons" id="show-search-box">search</i></a>
+				
 			</div>
 		</nav>
 	</header>
+	<br><br>
 	
-	<!-- Map -->
-	<main class="responsive-image" id="mapid"></main>
+	<main>
+		<About class="about"><h4>About</h4><br>
+			<p>Does your car ever go bump in the night, thanks to potholes on the streets of Chicago?</p>
+			 <p>Well fear no more, now you can enter your address and view newly reported potholes as well as potholes covered within the last week on your OpenStreetMaps. Instead of yelling <em>“Holy, Sh*t!,”</em> you’ll be yelling <em>“Holey, Chi!”</em></p><br>
 
-	<!-- Map Watermark -->
-	<img id="flag" src="assets/images/Flag_of_Chicago_red.png">
+			<h5>Business License API</h5>
+			<li>https://data.cityofchicago.org/resource/_311-potholes.json</li>
+			<li>OpenStreetMaps API</li><br>
 
-	<!-- Search Box -->
-	<!-- <div class="row" id="main-action">
-		<div class="col s12">
-			<div class="card blue lighten-5">
-				<div class="card-content">
-					<form class="input-field">
-						<input id="search" type="text" class="validate">
-						<label for="search">Search</label>
-					</form>
-				
-					<ul class="collapsible" data-collapsible="accordion">
-						<li>
-							<div class="collapsible-header blue lighten-5"><i class="material-icons">history</i>My History</div>
-							<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-						</li>
-						<li>
-							<div class="collapsible-header blue lighten-5"><i class="material-icons">people</i>What Are Others Searching?</div>
-							<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div> --> <!-- End of Search Box -->
 
-    <!-- <li>
-      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-  </li> -->
+			<h5>APP has:</h5>
+			<li>Current potholes  in chicago
+				<li>Potholes fixed within the last week in chicago</li>
+				<li>Ability to see potholes nearby you (by location)</li>
+				<li>Ability to search for potholes near specified location (input field)</li>
+				<li>MAYBE, if we can get it, how many requests have been made to repair a pothole (if you click on it you can see info)</li>
+
+
+			</p>
+		</About>
+</main>     
+
+
 
 
 
