@@ -31,25 +31,27 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
 
   var userSearch;
   window.addEventListener("keypress", function(event){
-    
-      if(event.which === 13) {
-        event.preventDefault();
-        //alert('You pressed enter!');
-        userSearch = $("#search").val();
-        userSearch = userSearch.toUpperCase();
-        console.log(userSearch);
 
-        //addressZoom(userSearch);
-         
-      }
+    if(event.which === 13) {
+      event.preventDefault();
+      //alert('You pressed enter!');
+      userSearch = $("#search").val();
+      userSearch = userSearch.toUpperCase();
+      console.log(userSearch);
+
+      //addressZoom(userSearch);
+    }
   }); //end of input listner
+
+  // show/hide search box on search button click
+  $("#show-search-box").on("click", searchBoxVisibility);
 
 }); // $(document).ready(function(){});
 
- 
 
 
-function buildMap(){
+
+function buildMap() {
 
   //get data from the chicago data portal 
   $.ajax({
@@ -84,24 +86,24 @@ function buildMap(){
 
     //data point icon for open pothole request
     var potholeOpen = new L.Icon({
-        iconUrl: 'assets/images/icon-green.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41],
+      iconUrl: 'assets/images/icon-green.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
     })
 
     //data point icon for closed pothole request
-     var potholeClosed = new L.Icon({
-          iconUrl: 'assets/images/icon-red.png',
-          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          shadowSize: [41, 41]
-      });
+    var potholeClosed = new L.Icon({
+      iconUrl: 'assets/images/icon-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
 
     //push all of this data into the firebase database
 
@@ -119,7 +121,7 @@ function buildMap(){
       //get the status of the pothole request
       var dataStatus = data[i].status;
       // console.log(data[i].status);
-        
+
       //get the address of the datapoint   
       var dataAddress = data[i].street_address;
       //console.log(data[i].street_address);
@@ -136,8 +138,8 @@ function buildMap(){
 
       }
       else {
-          L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
-          .openPopup();
+        L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
+        .openPopup();
       }
 
       //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
@@ -149,7 +151,7 @@ function buildMap(){
 
 
 
- 
+
 // take string from user entry and .toUppercase 
 //create for loop through the "street address" of pothole information and see 
 //equal to user entry
@@ -165,3 +167,18 @@ function centerLeafletMapOnMarker(map, marker) {
   var markerBounds = L.latLngBounds(latLngs);
   map.fitBounds(markerBounds);
 }
+
+var searchBoxShowing = false;
+
+function searchBoxVisibility() {
+  if(searchBoxShowing === false) {
+    var searchBoxHTML = '<div class="row" id="main-action"><div class="col s12"><div class="card blue lighten-5"><div class="card-content"><form class="input-field"><input id="search" type="text" class="validate"><label for="search">Search</label></form><ul class="collapsible" data-collapsible="accordion"><li><div class="collapsible-header blue lighten-5"><i class="material-icons">history</i>My History</div><div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div></li><li><div class="collapsible-header blue lighten-5"><i class="material-icons">people</i>What Are Others Searching?</div><div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div></li></ul></div></div></div></div>'
+    $("body").append(searchBoxHTML);
+
+    searchBoxShowing = true;
+  } else if(searchBoxShowing === true) {
+    $("#main-action").remove();
+
+    searchBoxShowing = false;
+  };
+}; // end of function searchBoxVisibility(){}
