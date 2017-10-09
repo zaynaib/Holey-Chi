@@ -8,8 +8,6 @@
 
 
 //configure the database
-
-// Initialize Firebase
 var config = {
   apiKey: "AIzaSyAo3hU0OhP2Sj7cwQSnpOQSomz72WhPyO0",
   authDomain: "project-1-26662.firebaseapp.com",
@@ -19,6 +17,7 @@ var config = {
   messagingSenderId: "1047540056380"
 };
 
+// Initialize Firebase
 firebase.initializeApp(config);
 
 
