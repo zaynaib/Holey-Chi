@@ -174,10 +174,10 @@ function centerLeafletMapOnMarker(map, marker) {
 }
 
 function searchBoxVisibility() {
-  var mainAction = document.getElementById("main-action")
+  var mainAction = document.getElementById("main-action");
   if (mainAction.style.display === "none") {
     mainAction.style.display = "block";
   } else {
     mainAction.style.display = "none";
-  }
+  };
 }; // end of function searchBoxVisibility(){}
