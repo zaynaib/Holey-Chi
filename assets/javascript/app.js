@@ -169,15 +169,16 @@ function buildMap() {
       //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
 
 
-     //write data into firebase database
-     //write to the firebase database
-     //console.log("This is data Action " + dataAction );
-     database.ref().push({
-      latitude: dataLat,
-      longitude: dataLong,
-      status: dataStatus,
-      address: dataAddress,
-      potholeAction: dataAction
+      //write data into firebase database
+      //write to the firebase database
+      //console.log("This is data Action " + dataAction );
+      
+      database.ref().push({
+        latitude: dataLat,
+        longitude: dataLong,
+        status: dataStatus,
+        address: dataAddress,
+        potholeAction: dataAction
 
       });//end of database push
 
