@@ -1,3 +1,7 @@
+* {
+	font-family: 'Roboto Slab', serif;
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -24,6 +28,11 @@ nav,
 	background-color: rgba(179, 221, 242, 1);
 }
 
+#logo {
+	height: auto;
+	width: 100px;
+}
+
 .collection-item {
 	background-color: rgba(0,0,0,0);
 }
@@ -42,11 +51,11 @@ nav,
 }
 
 #flag {
-	opacity: 0.7;
+	/*opacity: 0.7;*/
 	position: absolute;
 	top: 70px;
 	right: 10px;
-	width: 5%;
+	width: 10%;
 	min-width: 30px;
 	height: auto;
 	z-index: 2;
