@@ -43,6 +43,34 @@ var mymap = L.map('mapid',{
       markerZoomAnimation: true
     }).setView([41.8781, -87.6298], 15);
 
+ //create and add map layer
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox.streets',
+      accessToken: 'pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ'
+    }).addTo(mymap);
+
+   //data point icon for open pothole request
+    var potholeOpen = new L.Icon({
+      iconUrl: 'assets/images/icon-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    })
+
+    //data point icon for closed pothole request
+    var potholeClosed = new L.Icon({
+      iconUrl: 'assets/images/icon-green.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
 
 //get mapbound
 //whatever call you get to the api key 
@@ -61,12 +89,25 @@ var mymap = L.map('mapid',{
 
 //if map lat and long are in this bound then map
 
+/*
+
+function gecoding(address){
+$.get('https://nominatim.openstreetmap.org/search?format=json&q='+address, function(data){
+  console.log(data);
+    
+    //var addressLat = data[0].lat;
+    //var addressLon = data[0].lon;
+    //console.log(addressLat, addressLon);
+    
+      
+    });
+}
+*/
+
+
 
 $(document).ready(function(){ //manipulate the DOM once the page is loaded
   var windowHeight = $(window).height();
-
-
-
 
   $(".button-collapse").sideNav();
 
@@ -77,16 +118,32 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
   var userSearch;
   window.addEventListener("keypress", function(event){
 
+    //if the user presses enter
     if(event.which === 13) {
       event.preventDefault();
-        //alert('You pressed enter!');
+        
+        //grab the value of search
         userSearch = $("#search").val();
+        //make it to uppercase
         userSearch = userSearch.toUpperCase();
         console.log(userSearch);
-        userMatch(userSearch,mymap);
+
+        var address= userSearch;
+    
+      
+   
+
+
+        //get the lat and long of the users
+        //gecoding(userSearch);
+
+        //zoom into the pothole request if it exists 
+        zoomUserMatch(userSearch,mymap);
 
        //search box disappers after user search
        searchBoxVisibility(event);
+
+       
 
       }
   }); //end of input listner
@@ -107,7 +164,7 @@ function buildMap() {
     url: "https://data.cityofchicago.org/resource/787j-mys9.json",
     type: "GET",
     data: {
-      "$limit" : 500,
+      "$limit" : 5,
       "$$app_token" : "rWk97H84NMWrBWcdiG4IvjTjX"
     }
   }).done(function(data) {
@@ -115,34 +172,9 @@ function buildMap() {
     //console.log("Retrieved " + data.length + " records from the dataset!");
     console.log(data);
 
-    //create and add map layer
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 18,
-      id: 'mapbox.streets',
-      accessToken: 'pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ'
-    }).addTo(mymap);
+   
 
-    //data point icon for open pothole request
-    var potholeOpen = new L.Icon({
-      iconUrl: 'assets/images/icon-green.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    })
-
-    //data point icon for closed pothole request
-    var potholeClosed = new L.Icon({
-      iconUrl: 'assets/images/icon-red.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
+ 
 
     //push all of this data into the firebase database
 
@@ -152,14 +184,14 @@ function buildMap() {
       //get the latitude
       var dataLat = data[i].latitude;
       if(dataLat === undefined){
-        dataLat = "undefined";
+        dataLat = 0;
       }
       //console.log(data[i].latitude);
 
       //get the longitude
       var dataLong = data[i].longitude;
       if(dataLong === undefined){
-        dataLong = "undefined";
+        dataLong = 0;
       }
       //console.log(data[i].longitude);
 
@@ -189,6 +221,7 @@ function buildMap() {
       }
       //console.log("This is data action is set " +data[i].most_recent_action);
 
+      /*
       //if the pothole status is completed show green else show red
       if (dataStatus === "Completed") {
         //console.log([dataLat, dataLong], "this  is the info")
@@ -200,7 +233,7 @@ function buildMap() {
         L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
         .openPopup();
       }
-
+      */
       //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
 
 
@@ -232,7 +265,7 @@ function buildMap() {
       });//end of database push
 
       
-      console.log(dataLat, dataLong, dataStatus, dataAction,dataAddress );
+      //console.log(dataLat, dataLong, dataStatus, dataAction,dataAddress );
 
     }//end of for loop
 
@@ -243,7 +276,8 @@ function buildMap() {
 //read in data from firebase
 
 
-function userMatch(match,map){
+//zooms into the address that the user puts in the input box
+function zoomUserMatch(match,map){
   
 database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
   var point = snapshot.val();
@@ -257,9 +291,12 @@ database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
   //console.log("Long from the database " + pointLong);
 
   if(pointAddress === match){
-    console.log("working");
-   map.setView([pointLat, pointLong], 18);
+    //console.log("working");
+    //var marker = L.marker([pointLat, pointLong]).addTo(mymap);
+    var marker = L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
+    map.setView([pointLat, pointLong], 18);
   }
+
   
   //var newPost = snapshot.val().latitude;
   //console.log("newPost: "+newPost);
@@ -269,13 +306,7 @@ database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
 }
 
 
-//var playersKey = playersRef.key();
-//console.log(playersKey);
-//map out points within an area
 
-//get longitude and latitude from user click
-//add a latbound
-//latlngbound
 
 //map all those points in map bound
 //if lat or long is insde the bounds then map
@@ -309,28 +340,6 @@ database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
 
 function onMapClick(e) {
 
-
-  //data point icon for open pothole request
-    var potholeOpen = new L.Icon({
-      iconUrl: 'assets/images/icon-green.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    })
-
-    //data point icon for closed pothole request
-    var potholeClosed = new L.Icon({
-      iconUrl: 'assets/images/icon-red.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-
   var boundaries = mymap.getBounds();
   console.log("Map on click function working");
   var corner1 = L.latLng(41.887 ,-87.7200960);
@@ -354,25 +363,26 @@ function onMapClick(e) {
   var corner1 = L.latLng(pointLat, pointLong);
   //console.log(corner1);
 
+  var dataStatus = point.status;
+  console.log(dataStatus)
+
   if (boundaries.contains(corner1)){
 
-      L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
+     //if the pothole status is completed show green else show red
+      if (dataStatus === "Completed") {
+        //console.log([dataLat, dataLong], "this  is the info")
+       L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
+
+      }else{
+          L.marker([pointLat, pointLong], {icon: potholeOpen}).addTo(mymap);
+      }
+     
+
+      //L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
 
 
   }
 
-
-
-  //Polygon.getBounds().contains(MarketLatLng);
-
-
-  //mymap.getBounds().contains([lat,lng]);
-  //plot point
-  
-  
-  //var newPost = snapshot.val().latitude;
-  //console.log("newPost: "+newPost);
-  
 });
 }
 
