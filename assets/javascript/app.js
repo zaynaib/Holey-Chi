@@ -1,17 +1,3 @@
-//resources of leafletJs
-//http://leafletjs.com/reference-1.2.0.html#class
-//https://harrywood.co.uk/maps/examples/leaflet/5-events.view.html
-//http://usabilityetc.com/2016/07/how-to-center-a-leaflet-map-on-a-marker/
-//http://leafletjs.com/examples/zoom-levels/
-//https://teamtreehouse.com/library/ajax-basics
-//http://leafletjs.com/reference-1.2.0.html#interactive-layer
-//https://stackoverflow.com/questions/38768576/in-firebase-when-using-push-how-do-i-get-the-unique-id-and-store-in-my-databas
-
-
-
-//zipcodeZoom
-//http://techslides.com/zoom-into-us-zip-codes-in-leaflet-map
-//https://www.udacity.com/course/firebase-in-a-weekend-by-google-android--ud0352
 
 //configure the database
 //database tutorial https://www.tutorialspoint.com/firebase/firebase_data.htm
@@ -71,23 +57,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
       shadowSize: [41, 41]
     });
 
-
-//get mapbound
-//whatever call you get to the api key 
-//
-//display that in the map
-
-
-//grab the user input call to the address in the query string
-
-//https://data.cityofchicago.org/resource/787j-mys9.json?location_address=FOO
-//https://dev.socrata.com/foundry/data.cityofchicago.org/787j-mys9
-
-
-//https://www.mapbox.com/mapbox.js/example/v1.0.0/marker-radius-search/
-//https://www.mapbox.com/mapbox.js/api/v2.2.1/l-latlng/
-
-//if map lat and long are in this bound then map
 
 /*
 
@@ -250,10 +219,6 @@ function buildMap() {
 
     */
 
-    
-  
-    
-     //if(objectKey does not exsist in database  push)
      database.ref("/points/").push({
       latitude: dataLat,
       longitude: dataLong,
@@ -296,49 +261,13 @@ database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
     var marker = L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
     map.setView([pointLat, pointLong], 18);
   }
-
-  
-  //var newPost = snapshot.val().latitude;
-  //console.log("newPost: "+newPost);
   
 });
 
 }
-
-
-
-
-//map all those points in map bound
-//if lat or long is insde the bounds then map
-
-//https://stackoverflow.com/questions/33600480/how-to-check-if-points-are-within-radius-with-leaflet-javascript
-
-//retrieve data from the firebase database
-
-
-//http://joshuafrazier.info/leaflet-basics/
-//https://github.com/Esri/esri-leaflet-geocoder geocoding
-
-
-//TO DO
-//clean up code
-//make icon into a function
-//make the map stuff global
-//make sure click function acts right
-//add local storage up to five projects
-//add authetication with google email address
-//check out geocoding
-//check out d3.js tomorrow
-
-
-//http://leafletjs.com/reference-1.2.0.html#map-methods-for-modifying-map-state
-//setview will zoom to a specific point
-
-//JSON parse to set the data from ajax call into an object
-
   
 
-function onMapClick(e) {
+function onMapClickBoundary(e) {
 
   var boundaries = mymap.getBounds();
   console.log("Map on click function working");
@@ -386,56 +315,8 @@ function onMapClick(e) {
 });
 }
 
-var currentBoundaries = mymap.on('click', onMapClick);
+var currentBoundaries = mymap.on('click', onMapClickBoundary);
 console.log(currentBoundaries);
-//loop through firebase data and plot map points
-
-function newBoundaryPoints(boundary){
-  //plot points in boundaries
-  //contains<bounds>
-  database.ref("/points/").on("child_added", function(snapshot) {
-  var point = snapshot.val();
-  var pointAddress = point.address;
-  //console.log("Address from the database " + pointAddress);
-
-  var pointLat =point.latitude;
-  //console.log("Lat from the database " + pointLat);
-
-  var pointLong = point.longitude ;
-  //console.log("Long from the database " + pointLong);
-
-  var corner1 = L.latLng(pointLat, pointLong);
-  //console.log(corner1);
-
-  //Polygon.getBounds().contains(MarketLatLng);
-
-
-  //mymap.getBounds().contains([lat,lng]);
-  //plot point
-  
-  
-  //var newPost = snapshot.val().latitude;
-  //console.log("newPost: "+newPost);
-  
-});
-}
-
-    //var latlng = L.latLng(50.5, 30.5);
-
-    //L.contains(currentBoundaries);
-    //console.log(mymap.contains(currentBoundaries));
-
-    
-
-
-newBoundaryPoints();
-
-
-function centerLeafletMapOnMarker(map, marker) {
-  var latLngs = [ marker.getLatLng() ];
-  var markerBounds = L.latLngBounds(latLngs);
-  map.fitBounds(markerBounds);
-}
 
 
 
