@@ -33,26 +33,29 @@
 		<nav>
 
 			<div class="nav-wrapper container">
-				<a href="index.html" class="brand-logo grey-text text-darken-3">Holey Chi!</a>
-				
-				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons grey-text text-darken-3">menu</i></a>
-			</ul>
-			<ul class="right hide-on-med-and-down">
-				<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
-				<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
-				<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
-				<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
-			</ul>
-			<ul class="side-nav" id="mobile-demo">
-				<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
-				<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
-				<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
-				<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
-			</ul>
-			
-		</div>
-	</nav>
-</header>
+				<ul>
+					<a href="index.html" class="brand-logo grey-text text-darken-3">Holey Chi!</a>
+
+					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons grey-text text-darken-3">menu</i></a>
+				</ul>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
+					<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
+					<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
+					<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
+					<li><a href="http://www.chicityclerk.com/community-affairs/claims" target="_blank" class="grey-text text-darken-3">File a Claim</a></li>
+				</ul>
+				<ul class="side-nav" id="mobile-demo">
+					<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
+					<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
+					<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
+					<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
+					<li><a href="http://www.chicityclerk.com/community-affairs/claims" target="_blank" class="grey-text text-darken-3">File a Claim</a></li>
+				</ul>
+				<a href="#"><i class="right material-icons grey-text text-darken-3" id="show-search-box">search</i></a>
+			</div>
+		</nav>
+	</header>
 	<br><br>
 	
 	<main>
@@ -71,11 +74,11 @@
 				</div>
 				<div class="input-field">
 					<i class="material-icons prefix">message</i>
-					<input id="icon_message" type="tel" class="validate">
+					<textarea id="icon_message" class="materialize-textarea"></textarea>
 					<label for="icon_message">Message</label>
 				</div><br>
 
-				<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+				<button class="btn waves-effect waves-light" type="submit" name="action" id="contact-submit">Submit
 					<i class="material-icons right">send</i>
 				</button>
 			</form>
@@ -90,8 +93,8 @@
 
 
 
-  <footer class="page-footer">
-  	<div class="container">
+<footer class="page-footer">
+	<div class="container">
             <!-- <div class="row">
               <div class="col l6 s12">
                 <h5 class="white-text">Footer Content</h5>
