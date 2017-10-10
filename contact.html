@@ -29,11 +29,8 @@
 
 </head>
 <body>
-
-
 	<header>
 		<nav>
-
 			<div class="nav-wrapper container">
 				<ul>
 					<a href="index.html" class="brand-logo grey-text text-darken-3">
@@ -56,16 +53,18 @@
 					<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
 					<li><a href="http://www.chicityclerk.com/community-affairs/claims" target="_blank" class="grey-text text-darken-3">File a Claim</a></li>
 				</ul>
-				<a href="index.html"><i class="right material-icons grey-text text-darken-3" id="show-search-box">search</i></a>
+				<a href="index.html"><i class="right material-icons grey-text text-darken-3">search</i></a>
 			</div>
 		</nav>
 	</header>
 	<br><br>
 	
-	<main>
-		<contact class="contact"><h4>Contact Us</h4><br>
-		<!-- <div class="row">
-			<form class="col s6 offset-s3"><h4>Contact Us</h4><br> -->
+	<main class="row">
+		<section class="col s8 offset-s2 contact">
+			<h4>Contact Us</h4>
+			<br>
+
+			<form>
 				<div class="input-field">
 					<i class="material-icons prefix">account_circle</i>
 					<input id="icon_prefix" type="text" class="validate">
@@ -86,31 +85,21 @@
 					<i class="material-icons right">send</i>
 				</button>
 			</form>
+		</section>
+	</main>     
+
+	<footer class="page-footer">
+		<div class="footer-copyright">
+			<div class="container center">
+				<span class="grey-text text-darken-4">© 2017 <a href="#" class="grey-text text-darken-4">Ali Arfeen</a> | <a href="#" class="grey-text text-darken-4">Zaynaib Giwa</a> | <a href="#" class="grey-text text-darken-4">Kaitlyn Strand</a> | <a href="#" class="grey-text text-darken-4">Jason Terrell</a>
+				</span>
+			</div>
 		</div>
-		
-	</div>
-</contact>
-</main>     
+	</footer>
 
-
-
-
-
-
-<footer class="page-footer">
-	<div class="footer-copyright">
-		<div class="container center">
-			<span class="grey-text text-darken-4">© 2017 <a href="#" class="grey-text text-darken-4">Ali Arfeen</a> | <a href="#" class="grey-text text-darken-4">Zaynaib Giwa</a> | <a href="#" class="grey-text text-darken-4">Kaitlyn Strand</a> | <a href="#" class="grey-text text-darken-4">Jason Terrell</a>
-			</span>
-		</div>
-	</div>
-</footer>
-
-
-
-<script type="text/javascript" src="assets/javascript/leaflet.js"></script>
-<script type="text/javascript" src="assets/javascript/app.js"></script>
-
+	<script type="text/javascript">
+		$(".button-collapse").sideNav();
+	</script>
 
 </body>
 </html>
