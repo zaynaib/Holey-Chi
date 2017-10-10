@@ -13,9 +13,6 @@ var config = {
 // Initialize Firebase
 firebase.initializeApp(config);
 
-
-
-
 //create a reference to the database
 var database = firebase.database();
 var ref = firebase.database().ref('points');
@@ -30,10 +27,10 @@ var mymap = L.map('mapid',{
     }).setView([41.8781, -87.6298], 15);
 
  //create and add map layer
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+L.tileLayer('https://api.mapbox.com/styles/v1/kaitlynstrand/cj8kds14v4v052sla08kh9q37/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 18,
-      id: 'mapbox.streets',
+      id: 'mapbox.comic',
       accessToken: 'pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ'
     }).addTo(mymap);
 
@@ -57,22 +54,15 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
       shadowSize: [41, 41]
     });
 
-
-/*
-
-function gecoding(address){
-$.get('https://nominatim.openstreetmap.org/search?format=json&q='+address, function(data){
-  console.log(data);
-    
-    //var addressLat = data[0].lat;
-    //var addressLon = data[0].lon;
-    //console.log(addressLat, addressLon);
-    
-      
+    var addressIcon = new L.Icon({
+      iconUrl: 'assets/images/address.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      dragging: true,
+      iconSize: [32, 41],
+      iconAnchor: [12, 41],
+      //popupAnchor: [1, -34],
+      shadowSize: [41, 41]
     });
-}
-*/
-
 
 
 $(document).ready(function(){ //manipulate the DOM once the page is loaded
@@ -97,22 +87,28 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
         userSearch = userSearch.toUpperCase();
         console.log(userSearch);
 
-        var address= userSearch;
+    var address = userSearch;
+    $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address, function(data){
+      var addressLat = data[0].lat
+      var addressLon = data[0].lon
     
+      L.marker([addressLat, addressLon], {icon: addressIcon}).addTo(mymap)
       
+      var circle = L.circle([addressLat, addressLon], {
+        color: 'red',
+        radius: 5000,
+        fillColor: '#f03',
+        fillOpacity: 0.3
+      }).addTo(mymap);
+
+        console.log(addressLat, addressLon)
+    });
    
-
-
-        //get the lat and long of the users
-        //gecoding(userSearch);
-
         //zoom into the pothole request if it exists 
-        zoomUserMatch(userSearch,mymap);
+       zoomUserMatch(userSearch,mymap);
 
        //search box disappers after user search
        searchBoxVisibility(event);
-
-       
 
       }
   }); //end of input listner
@@ -123,7 +119,6 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
   $("#search-menu").tabs({"swipeable": true});
 
 }); // $(document).ready(function(){});
-
 
 
 function buildMap() {
@@ -140,10 +135,6 @@ function buildMap() {
 
     //console.log("Retrieved " + data.length + " records from the dataset!");
     console.log(data);
-
-   
-
- 
 
     //push all of this data into the firebase database
 
