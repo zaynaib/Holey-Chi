@@ -93,20 +93,6 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
 
   $(".button-collapse").sideNav();
 
-
-
- //parse into into an array
-  //look into an
-
-  /*
-  string = JSON.stringify(array)
-"[5,6,7,8]"
-array = JSON.parse(string)
-(4) [5, 6, 7, 8]
-
-  */
-
-
   //create the map
   var appMap = buildMap();
 
@@ -152,21 +138,13 @@ array = JSON.parse(string)
     
       L.marker([addressLat, addressLon], {icon: addressIcon}).addTo(mymap)
       
-<<<<<<< HEAD
       var circle = L.circle([addressLat, addressLon], {
         color: 'red',
         radius: 10,
         fillColor: '#f03',
         fillOpacity: 0.3
       }).addTo(mymap);
-=======
-      // var circle = L.circle([addressLat, addressLon], {
-      //   color: 'red',
-      //   radius: 1000,
-      //   fillColor: '#f03',
-      //   fillOpacity: 0.3
-      // }).addTo(mymap);
->>>>>>> 9a5373edc83105805a41540d7be87777a419e24c
+
       
       mymap.setView([addressLat, addressLon], 18)
       
