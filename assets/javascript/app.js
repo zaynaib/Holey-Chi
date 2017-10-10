@@ -44,7 +44,10 @@ var mymap = L.map('mapid',{
     }).setView([41.8781, -87.6298], 15);
 
 
-
+//get mapbound
+//whatever call you get to the api key 
+//
+//display that in the map
 
 
 //grab the user input call to the address in the query string
@@ -82,6 +85,9 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
         console.log(userSearch);
         userMatch(userSearch,mymap);
 
+       //search box disappers after user search
+       searchBoxVisibility(event);
+
       }
   }); //end of input listner
 
@@ -101,7 +107,7 @@ function buildMap() {
     url: "https://data.cityofchicago.org/resource/787j-mys9.json",
     type: "GET",
     data: {
-      "$limit" : 5,
+      "$limit" : 500,
       "$$app_token" : "rWk97H84NMWrBWcdiG4IvjTjX"
     }
   }).done(function(data) {
@@ -214,14 +220,12 @@ function buildMap() {
     
   
     
-     var objectKey = i;
      //if(objectKey does not exsist in database  push)
      database.ref("/points/").push({
       latitude: dataLat,
       longitude: dataLong,
       status: dataStatus,
       address: dataAddress,
-      //dataKey: objectKey,
       potholeAction: dataAction
 
 
@@ -242,18 +246,19 @@ function buildMap() {
 function userMatch(match,map){
   
 database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
-  var newAddress = snapshot.val().address;
-  console.log("Address from the database " + newAddress);
+  var point = snapshot.val();
+  var pointAddress = point.address;
+  //console.log("Address from the database " + pointAddress);
 
-  var newLat =snapshot.val().latitude;
-  console.log("Lat from the database " + newLat);
+  var pointLat =point.latitude;
+  //console.log("Lat from the database " + pointLat);
 
-  var newLong = snapshot.val().longitude ;
-  console.log("Long from the database " + newLong);
+  var pointLong = point.longitude ;
+  //console.log("Long from the database " + pointLong);
 
-  if(newAddress === match){
+  if(pointAddress === match){
     console.log("working");
-   map.setView([newLat, newLong], 15);
+   map.setView([pointLat, pointLong], 18);
   }
   
   //var newPost = snapshot.val().latitude;
@@ -280,7 +285,19 @@ database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
 //retrieve data from the firebase database
 
 
+//http://joshuafrazier.info/leaflet-basics/
+//https://github.com/Esri/esri-leaflet-geocoder geocoding
 
+
+//TO DO
+//clean up code
+//make icon into a function
+//make the map stuff global
+//make sure click function acts right
+//add local storage up to five projects
+//add authetication with google email address
+//check out geocoding
+//check out d3.js tomorrow
 
 
 //http://leafletjs.com/reference-1.2.0.html#map-methods-for-modifying-map-state
@@ -288,12 +305,129 @@ database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
 
 //JSON parse to set the data from ajax call into an object
 
+  
+
+function onMapClick(e) {
+
+
+  //data point icon for open pothole request
+    var potholeOpen = new L.Icon({
+      iconUrl: 'assets/images/icon-green.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    })
+
+    //data point icon for closed pothole request
+    var potholeClosed = new L.Icon({
+      iconUrl: 'assets/images/icon-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+  var boundaries = mymap.getBounds();
+  console.log("Map on click function working");
+  var corner1 = L.latLng(41.887 ,-87.7200960);
+  //console.log(boundaries.contains(corner1));
+
+
+  console.log(boundaries);
+  //return boundaries;
+
+  database.ref("/points/").on("child_added", function(snapshot) {
+  var point = snapshot.val();
+  var pointAddress = point.address;
+  //console.log("Address from the database " + pointAddress);
+
+  var pointLat =point.latitude;
+  //console.log("Lat from the database " + pointLat);
+
+  var pointLong = point.longitude ;
+  //console.log("Long from the database " + pointLong);
+
+  var corner1 = L.latLng(pointLat, pointLong);
+  //console.log(corner1);
+
+  if (boundaries.contains(corner1)){
+
+      L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
+
+
+  }
+
+
+
+  //Polygon.getBounds().contains(MarketLatLng);
+
+
+  //mymap.getBounds().contains([lat,lng]);
+  //plot point
+  
+  
+  //var newPost = snapshot.val().latitude;
+  //console.log("newPost: "+newPost);
+  
+});
+}
+
+var currentBoundaries = mymap.on('click', onMapClick);
+console.log(currentBoundaries);
+//loop through firebase data and plot map points
+
+function newBoundaryPoints(boundary){
+  //plot points in boundaries
+  //contains<bounds>
+  database.ref("/points/").on("child_added", function(snapshot) {
+  var point = snapshot.val();
+  var pointAddress = point.address;
+  //console.log("Address from the database " + pointAddress);
+
+  var pointLat =point.latitude;
+  //console.log("Lat from the database " + pointLat);
+
+  var pointLong = point.longitude ;
+  //console.log("Long from the database " + pointLong);
+
+  var corner1 = L.latLng(pointLat, pointLong);
+  //console.log(corner1);
+
+  //Polygon.getBounds().contains(MarketLatLng);
+
+
+  //mymap.getBounds().contains([lat,lng]);
+  //plot point
+  
+  
+  //var newPost = snapshot.val().latitude;
+  //console.log("newPost: "+newPost);
+  
+});
+}
+
+    //var latlng = L.latLng(50.5, 30.5);
+
+    //L.contains(currentBoundaries);
+    //console.log(mymap.contains(currentBoundaries));
+
+    
+
+
+newBoundaryPoints();
+
 
 function centerLeafletMapOnMarker(map, marker) {
   var latLngs = [ marker.getLatLng() ];
   var markerBounds = L.latLngBounds(latLngs);
   map.fitBounds(markerBounds);
 }
+
+
 
 function searchBoxVisibility(event) {
   event.preventDefault();
