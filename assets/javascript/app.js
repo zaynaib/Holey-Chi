@@ -21,17 +21,41 @@ var mymap = L.map('mapid',{
       trackResize: true,
       dragging: true,
       doubleClickZoom: true,
+      // layers: [dayMap],
       zoomAnimation: true,
       markerZoomAnimation: true
     }).setView([41.8781, -87.6298], 15);
 
+
+// var nightMap = L.tileLayer({
+//   mapboxUrl: 'https://api.mapbox.com/styles/v1/mapbox/navigation-guidance-night-v2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ',
+//   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+//   maxZoom: 18,
+//   accessToken: 'pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ'
+// });
+
+//   var dayMap = L.tileLayer({
+//   mapboxUrl: 'https://api.mapbox.com/styles/v1/mapbox/navigation-guidance-day-v2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ',
+//   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+//   maxZoom: 18,
+//   accessToken: 'pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ'
+// });
+
+//   var baseMaps = {
+//     "Night View": nightMap,
+//     "Day View": dayMap
+// };
+
+// L.control.layers(baseMaps).addTo(mymap);
+
  //create and add map layer
-L.tileLayer('https://api.mapbox.com/styles/v1/kaitlynstrand/cj8kds14v4v052sla08kh9q37/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ', {
+L.tileLayer('https://api.mapbox.com/styles/v1/kaitlynstrand/cj8m0fylo6djy2slauidunfk5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 18,
       id: 'mapbox.comic',
       accessToken: 'pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ'
     }).addTo(mymap);
+
 
    //data point icon for open pothole request
     var potholeOpen = new L.Icon({
@@ -93,12 +117,12 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
     
       L.marker([addressLat, addressLon], {icon: addressIcon}).addTo(mymap)
       
-      var circle = L.circle([addressLat, addressLon], {
-        color: 'red',
-        radius: 1000,
-        fillColor: '#f03',
-        fillOpacity: 0.3
-      }).addTo(mymap);
+      // var circle = L.circle([addressLat, addressLon], {
+      //   color: 'red',
+      //   radius: 1000,
+      //   fillColor: '#f03',
+      //   fillOpacity: 0.3
+      // }).addTo(mymap);
       
       mymap.setView([addressLat, addressLon], 18)
       
