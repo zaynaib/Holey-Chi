@@ -34,6 +34,8 @@
 	<!-- Materialize JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+
 	<!-- Our CSS -->
 	<link rel="stylesheet" href="assets/css/leaflet.css">
 	<link rel="stylesheet" href="assets/css/style.css">
@@ -44,10 +46,11 @@
 <body>
 	<header>
 		<nav>
-
 			<div class="nav-wrapper container">
 				<ul>
-					<a href="index.html" class="brand-logo grey-text text-darken-3">Holey Chi!</a>
+					<a href="index.html" class="brand-logo grey-text text-darken-3">
+						<img src="assets/images/logo-transparent.png" id="logo">
+					</a>
 
 					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons grey-text text-darken-3">menu</i></a>
 				</ul>
@@ -78,11 +81,8 @@
 	<!-- Map -->
 	<main class="responsive-image" id="mapid"></main>
 
-	<!-- Map Watermark -->
-	<img id="flag" src="assets/images/Flag_of_Chicago_red.png">
-
 	<!-- Collapsible Search Box -->
-	<div class="card blue lighten-5" id="main-action">
+	<div class="card blue lighten-5" id="main-action" style="display: none;">
 		<div class="card-content">
 			<form class="input-field">
 				<input id="search" type="text" class="validate">
