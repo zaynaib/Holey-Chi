@@ -1,4 +1,3 @@
-
 //configure the database
 //database tutorial https://www.tutorialspoint.com/firebase/firebase_data.htm
 var config = {
@@ -96,20 +95,16 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
       
       var circle = L.circle([addressLat, addressLon], {
         color: 'red',
-        radius: 5000,
+        radius: 1000,
         fillColor: '#f03',
         fillOpacity: 0.3
       }).addTo(mymap);
-
-        console.log(addressLat, addressLon)
+      
+      mymap.setView([addressLat, addressLon], 18)
+      
     });
-   
-        //zoom into the pothole request if it exists 
-       zoomUserMatch(userSearch,mymap);
-
-       //search box disappers after user search
+       
        searchBoxVisibility(event);
-
       }
   }); //end of input listner
 
@@ -181,35 +176,6 @@ function buildMap() {
       }
       //console.log("This is data action is set " +data[i].most_recent_action);
 
-      /*
-      //if the pothole status is completed show green else show red
-      if (dataStatus === "Completed") {
-        //console.log([dataLat, dataLong], "this  is the info")
-        L.marker([dataLat, dataLong], {icon: potholeClosed}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
-        .openPopup();
-
-      }
-      else {
-        L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
-        .openPopup();
-      }
-      */
-      //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
-
-
-
-     //write data into firebase database
-     //write to the firebase database
-     //console.log("This is data Action " + dataAction );
-
-
-     /*TO DO
-     Learn how to clear the database
-     Learn how to check for unique data entry so it won't add everytime the page loads
-     Learn how to put database information into a global array
-
-    */
-
      database.ref("/points/").push({
       latitude: dataLat,
       longitude: dataLong,
@@ -219,44 +185,10 @@ function buildMap() {
 
 
       });//end of database push
-
-      
       //console.log(dataLat, dataLong, dataStatus, dataAction,dataAddress );
-
     }//end of for loop
-
   }); // .done function
-
 }; // function buildMap(){}
-
-//read in data from firebase
-
-
-//zooms into the address that the user puts in the input box
-function zoomUserMatch(match,map){
-  
-database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
-  var point = snapshot.val();
-  var pointAddress = point.address;
-  //console.log("Address from the database " + pointAddress);
-
-  var pointLat =point.latitude;
-  //console.log("Lat from the database " + pointLat);
-
-  var pointLong = point.longitude ;
-  //console.log("Long from the database " + pointLong);
-
-  if(pointAddress === match){
-    //console.log("working");
-    //var marker = L.marker([pointLat, pointLong]).addTo(mymap);
-    var marker = L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
-    map.setView([pointLat, pointLong], 18);
-  }
-  
-});
-
-}
-  
 
 function onMapClickBoundary(e) {
 
@@ -264,7 +196,6 @@ function onMapClickBoundary(e) {
   console.log("Map on click function working");
   var corner1 = L.latLng(41.887 ,-87.7200960);
   //console.log(boundaries.contains(corner1));
-
 
   console.log(boundaries);
   //return boundaries;
@@ -277,7 +208,7 @@ function onMapClickBoundary(e) {
   var pointLat =point.latitude;
   //console.log("Lat from the database " + pointLat);
 
-  var pointLong = point.longitude ;
+  var pointLong = point.longitude;
   //console.log("Long from the database " + pointLong);
 
   var corner1 = L.latLng(pointLat, pointLong);
@@ -296,20 +227,13 @@ function onMapClickBoundary(e) {
       }else{
           L.marker([pointLat, pointLong], {icon: potholeOpen}).addTo(mymap);
       }
-     
-
       //L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
-
-
-  }
-
-});
-}
+  };
+      });
+      };
 
 var currentBoundaries = mymap.on('click', onMapClickBoundary);
 console.log(currentBoundaries);
-
-
 
 function searchBoxVisibility(event) {
   event.preventDefault();
@@ -321,3 +245,53 @@ function searchBoxVisibility(event) {
     mainAction.style.display = "none";
   };
 }; // end of function searchBoxVisibility(){}
+
+
+//read in data from firebase
+      /*
+      //if the pothole status is completed show green else show red
+      if (dataStatus === "Completed") {
+        //console.log([dataLat, dataLong], "this  is the info")
+        L.marker([dataLat, dataLong], {icon: potholeClosed}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
+        .openPopup();
+
+      }
+      else {
+        L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
+        .openPopup();
+      }
+      */
+      //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
+
+     //write data into firebase database
+     //write to the firebase database
+     //console.log("This is data Action " + dataAction );
+
+     /*TO DO
+     Learn how to clear the database
+     Learn how to check for unique data entry so it won't add everytime the page loads
+     Learn how to put database information into a global array    */
+
+//zooms into the address that the user puts in the input box
+// function zoomUserMatch(match,map){
+  
+// database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
+//   var point = snapshot.val();
+//   var pointAddress = point.address;
+//   //console.log("Address from the database " + pointAddress);
+
+//   var pointLat =point.latitude;
+//   //console.log("Lat from the database " + pointLat);
+
+//   var pointLong = point.longitude ;
+//   //console.log("Long from the database " + pointLong);
+
+//   if(pointAddress === match){
+//     //console.log("working");
+//     //var marker = L.marker([pointLat, pointLong]).addTo(mymap);
+//     var marker = L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
+//     map.setView([pointLat, pointLong], 18);
+//   }
+// });
+// }
+  
