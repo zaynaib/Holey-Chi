@@ -26,7 +26,6 @@ var mymap = L.map('mapid',{
       markerZoomAnimation: true
     }).setView([41.8781, -87.6298], 15);
 
-
 // var nightMap = L.tileLayer({
 //   mapboxUrl: 'https://api.mapbox.com/styles/v1/mapbox/navigation-guidance-night-v2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ',
 //   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -49,6 +48,7 @@ var mymap = L.map('mapid',{
 // L.control.layers(baseMaps).addTo(mymap);
 
  //create and add map layer
+
 L.tileLayer('https://api.mapbox.com/styles/v1/kaitlynstrand/cj8m0fylo6djy2slauidunfk5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2FpdGx5bnN0cmFuZCIsImEiOiJjajhlcmwweWgxNjkzMzNwbTBub3ZuN3FxIn0.1Nz-cdZ8Ew7Oa3dxqxzdaQ', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 18,
@@ -58,14 +58,14 @@ L.tileLayer('https://api.mapbox.com/styles/v1/kaitlynstrand/cj8m0fylo6djy2slauid
 
 
    //data point icon for open pothole request
-    var potholeOpen = new L.Icon({
-      iconUrl: 'assets/images/icon-red.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    })
+   var potholeOpen = new L.Icon({
+    iconUrl: 'assets/images/icon-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  })
 
     //data point icon for closed pothole request
     var potholeClosed = new L.Icon({
@@ -93,27 +93,62 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
 
   $(".button-collapse").sideNav();
 
+
+
+ //parse into into an array
+  //look into an
+
+  /*
+  string = JSON.stringify(array)
+"[5,6,7,8]"
+array = JSON.parse(string)
+(4) [5, 6, 7, 8]
+
+  */
+
+
   //create the map
   var appMap = buildMap();
 
   //grab the user's input
   var userSearch;
+
+
+  var searchArr =[]; 
   window.addEventListener("keypress", function(event){
 
     //if the user presses enter
     if(event.which === 13) {
       event.preventDefault();
-        
+      
         //grab the value of search
         userSearch = $("#search").val();
         //make it to uppercase
         userSearch = userSearch.toUpperCase();
         console.log(userSearch);
 
+        //if searchArr is empty push the user search in the array
+        if(searchArr.length ===0){
+          searchArr.push(userSearch);
+          localStorage.setItem("userSearch", searchArr);
+
+        //checks for search duplicates. if there are no duplicates add it to the search array and set 
+        //it to the local storage
+        }else if(searchArr.includes(userSearch) === false){
+            searchArr.push(userSearch);
+            localStorage.setItem("userSearch",searchArr);
+
+        }
+        if(searchArr.length > 4){
+          searchArr.unshift(); 
+        }
+        console.log(searchArr);
+          
     var address = userSearch;
     $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address, function(data){
-      var addressLat = data[0].lat
-      var addressLon = data[0].lon
+      console.log(data);
+      var addressLat = data[0].lat;
+      var addressLon = data[0].lon;
     
       L.marker([addressLat, addressLon], {icon: addressIcon}).addTo(mymap)
       
@@ -127,10 +162,11 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
       mymap.setView([addressLat, addressLon], 18)
       
     });
-       
+       zoomUserMatch(userSearch,mymap)
        searchBoxVisibility(event);
       }
   }); //end of input listner
+
 
   // show/hide search box on search button click
   $("#show-search-box").on("click", searchBoxVisibility);
@@ -198,12 +234,12 @@ function buildMap() {
       }
       //console.log("This is data action is set " +data[i].most_recent_action);
 
-     database.ref("/points/").push({
-      latitude: dataLat,
-      longitude: dataLong,
-      status: dataStatus,
-      address: dataAddress,
-      potholeAction: dataAction
+      database.ref("/points/").push({
+        latitude: dataLat,
+        longitude: dataLong,
+        status: dataStatus,
+        address: dataAddress,
+        potholeAction: dataAction
 
 
       });//end of database push
@@ -211,6 +247,8 @@ function buildMap() {
     }//end of for loop
   }); // .done function
 }; // function buildMap(){}
+
+
 
 function onMapClickBoundary(e) {
 
@@ -223,8 +261,8 @@ function onMapClickBoundary(e) {
   //return boundaries;
 
   database.ref("/points/").on("child_added", function(snapshot) {
-  var point = snapshot.val();
-  var pointAddress = point.address;
+    var point = snapshot.val();
+    var pointAddress = point.address;
   //console.log("Address from the database " + pointAddress);
 
   var pointLat =point.latitude;
@@ -242,17 +280,17 @@ function onMapClickBoundary(e) {
   if (boundaries.contains(corner1)){
 
      //if the pothole status is completed show green else show red
-      if (dataStatus === "Completed") {
+     if (dataStatus === "Completed") {
         //console.log([dataLat, dataLong], "this  is the info")
-       L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
+        L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
 
       }else{
-          L.marker([pointLat, pointLong], {icon: potholeOpen}).addTo(mymap);
+        L.marker([pointLat, pointLong], {icon: potholeOpen}).addTo(mymap);
       }
       //L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
-  };
-      });
-      };
+    };
+  });
+};
 
 var currentBoundaries = mymap.on('click', onMapClickBoundary);
 console.log(currentBoundaries);
@@ -269,7 +307,6 @@ function searchBoxVisibility(event) {
 }; // end of function searchBoxVisibility(){}
 
 
-//read in data from firebase
       /*
       //if the pothole status is completed show green else show red
       if (dataStatus === "Completed") {
@@ -295,25 +332,24 @@ function searchBoxVisibility(event) {
      Learn how to put database information into a global array    */
 
 //zooms into the address that the user puts in the input box
-// function zoomUserMatch(match,map){
+function zoomUserMatch(match,map){
   
-// database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
-//   var point = snapshot.val();
-//   var pointAddress = point.address;
-//   //console.log("Address from the database " + pointAddress);
 
-//   var pointLat =point.latitude;
-//   //console.log("Lat from the database " + pointLat);
+database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
+  var point = snapshot.val();
+  var pointAddress = point.address;
+  //console.log("Address from the database " + pointAddress);
+  var pointLat =point.latitude;
+  //console.log("Lat from the database " + pointLat);
 
-//   var pointLong = point.longitude ;
-//   //console.log("Long from the database " + pointLong);
+  var pointLong = point.longitude ;
+  //console.log("Long from the database " + pointLong);
 
-//   if(pointAddress === match){
-//     //console.log("working");
-//     //var marker = L.marker([pointLat, pointLong]).addTo(mymap);
-//     var marker = L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
-//     map.setView([pointLat, pointLong], 18);
-//   }
-// });
-// }
-  
+  if(pointAddress === match){
+  //console.log("working");
+  //var marker = L.marker([pointLat, pointLong]).addTo(mymap);
+  var marker = L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
+  map.setView([pointLat, pointLong], 18);
+    }
+  });
+}
