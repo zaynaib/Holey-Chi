@@ -147,8 +147,6 @@ array = JSON.parse(string)
   // show/hide search box on search button click
   $("#show-search-box").on("click", searchBoxVisibility);
 
-  $("#search-menu").tabs({"swipeable": true});
-
 }); // $(document).ready(function(){});
 
 
