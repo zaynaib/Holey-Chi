@@ -37,7 +37,12 @@ nav,
 	background-color: rgba(0,0,0,0);
 }
 
-.collection-item:hover {
+.avatar:hover {
+	background-color: #e3f2fd;
+}
+
+.my-history:hover,
+.global-history:hover {
 	background-color: #424242!important;
 }
 
@@ -48,17 +53,6 @@ nav,
 #mapid {
 	height: 100%;
 	z-index: 1;
-}
-
-#flag {
-	/*opacity: 0.7;*/
-	position: absolute;
-	top: 70px;
-	right: 10px;
-	width: 10%;
-	min-width: 30px;
-	height: auto;
-	z-index: 2;
 }
 
 #main-action {
