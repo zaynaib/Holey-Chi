@@ -9,7 +9,7 @@ main {
 }
 
 body {
-    background-image: url("../images/hypnotize/hypnotize.png");
+    background-image: url("../images/concrete-texture/concrete-texture.png");
 	position: relative;
 }
 
@@ -22,6 +22,10 @@ nav,
 .nav-wrapper,
 .page-footer {
 	background-color: rgba(179, 221, 242, 1);
+}
+
+.collection-item {
+	background-color: rgba(0,0,0,0);
 }
 
 .collection-item:hover {
