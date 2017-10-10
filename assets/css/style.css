@@ -9,6 +9,7 @@ main {
 }
 
 body {
+    background-image: url("../images/hypnotize/hypnotize.png");
 	position: relative;
 }
 
