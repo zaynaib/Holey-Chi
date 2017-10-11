@@ -132,23 +132,12 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
         }
         //console.log(searchArr);
 
+        //loop through the saved searches from the array and show them in the accordian
         for(var i = 0 ; i<searchArr.length;i++){
-          //var counter = 1
           var selector = "#my-history-" + i;
-          console.log(selector);
           $(selector).text(searchArr[i]);
-          console.log(searchArr[i]);
-          //counter = counter+1;
 
         }
-
-        /*
-        $("#my-history-2").text("hello");
-        var selector = "#my-history-3";
-        $(selector).text("hello");
-        */
-        //$(".my-history collection-item").eq(1).text("hello"); 
-
           
     var address = userSearch;
     $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address, function(data){
