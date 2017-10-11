@@ -100,6 +100,8 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
   var userSearch;
 
 
+  //historyList, my-history
+  //stores user's searches
   var searchArr =[]; 
   window.addEventListener("keypress", function(event){
 
@@ -128,7 +130,25 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
         if(searchArr.length > 4){
           searchArr.unshift(); 
         }
-        console.log(searchArr);
+        //console.log(searchArr);
+
+        for(var i = 0 ; i<searchArr.length;i++){
+          //var counter = 1
+          var selector = "#my-history-" + i;
+          console.log(selector);
+          $(selector).text(searchArr[i]);
+          console.log(searchArr[i]);
+          //counter = counter+1;
+
+        }
+
+        /*
+        $("#my-history-2").text("hello");
+        var selector = "#my-history-3";
+        $(selector).text("hello");
+        */
+        //$(".my-history collection-item").eq(1).text("hello"); 
+
           
     var address = userSearch;
     $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address, function(data){
@@ -138,7 +158,7 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
     
       L.marker([addressLat, addressLon], {icon: addressIcon}).addTo(mymap)
       
-
+      /*
       var circle = L.circle([addressLat, addressLon], {
         color: 'red',
         radius: 10,
@@ -146,7 +166,7 @@ $(document).ready(function(){ //manipulate the DOM once the page is loaded
         fillOpacity: 0.3
       }).addTo(mymap);
 
-
+      */
       
       mymap.setView([addressLat, addressLon], 18)
       
