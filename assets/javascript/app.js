@@ -1,13 +1,13 @@
 //configure the database
 //database tutorial https://www.tutorialspoint.com/firebase/firebase_data.htm
-var config = {
-  apiKey: "AIzaSyAo3hU0OhP2Sj7cwQSnpOQSomz72WhPyO0",
-  authDomain: "project-1-26662.firebaseapp.com",
-  databaseURL: "https://project-1-26662.firebaseio.com",
-  projectId: "project-1-26662",
-  storageBucket: "",
-  messagingSenderId: "1047540056380"
-};
+ var config = {
+    apiKey: "AIzaSyDAwVgQpTCagEmTDfNwKWzo3j5U0-yNBVQ",
+    authDomain: "project-f375f.firebaseapp.com",
+    databaseURL: "https://project-f375f.firebaseio.com",
+    projectId: "project-f375f",
+    storageBucket: "",
+    messagingSenderId: "1036832160955"
+  };
 
 // Initialize Firebase
 firebase.initializeApp(config);
@@ -179,7 +179,7 @@ function buildMap() {
     url: "https://data.cityofchicago.org/resource/787j-mys9.json",
     type: "GET",
     data: {
-      "$limit" : 5,
+      "$limit" : 200,
       "$$app_token" : "rWk97H84NMWrBWcdiG4IvjTjX"
     }
   }).done(function(data) {
@@ -280,10 +280,12 @@ function onMapClickBoundary(e) {
      //if the pothole status is completed show green else show red
      if (dataStatus === "Completed") {
         //console.log([dataLat, dataLong], "this  is the info")
-        L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
+        L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap).bindPopup("<b>" + pointAddress + "</b><br>")
+        .openPopup();
 
       }else{
-        L.marker([pointLat, pointLong], {icon: potholeOpen}).addTo(mymap);
+        L.marker([pointLat, pointLong], {icon: potholeOpen}).addTo(mymap).bindPopup("<b>" + pointAddress + "</b><br>")
+        .openPopup();
       }
       //L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
     };
@@ -318,16 +320,6 @@ function searchBoxVisibility(event) {
         .openPopup();
       }
       */
-      //var marker = L.marker([dataLat,dataLong]).addTo(mymap);
-
-     //write data into firebase database
-     //write to the firebase database
-     //console.log("This is data Action " + dataAction );
-
-     /*TO DO
-     Learn how to clear the database
-     Learn how to check for unique data entry so it won't add everytime the page loads
-     Learn how to put database information into a global array    */
 
 //zooms into the address that the user puts in the input box
 function zoomUserMatch(match,map){
@@ -345,7 +337,6 @@ database.ref("/points/").on("child_added", function(snapshot, prevChildKey) {
 
   if(pointAddress === match){
   //console.log("working");
-  //var marker = L.marker([pointLat, pointLong]).addTo(mymap);
   var marker = L.marker([pointLat, pointLong], {icon: potholeClosed}).addTo(mymap);
   map.setView([pointLat, pointLong], 18);
     }
