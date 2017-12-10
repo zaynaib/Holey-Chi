@@ -1,7 +1,7 @@
 # Holey Chi
 
 ## Summary
-Our project enables Chicagoland drivers to easily see potholes that have been reported, as well as to see potholes that have been recently repaired by accessing the City of Chicago's Data API and plotting the locations using the MapBox API. The easy to use interface allows users to zoom in to areas that are relevant to them, as well as to report new potholes that the city may not be aware of.
+Our project enables Chicagoland drivers to easily see potholes that have been reported, as well as to see potholes that have been recently repaired by accessing the [City of Chicago's Data API](https://data.cityofchicago.org/) and plotting the locations using the MapBox API. The easy to use interface allows users to zoom in to areas that are relevant to them, as well as to report new potholes that the city may not be aware of.
 
 ## Technologies Used
 * MapBox
