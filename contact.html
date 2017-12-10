@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Holey Chi - Contact Us</title>
+
+	<!-- Viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Favicon -->
+	<link rel='icon' href='assets/images/favicon-outside-transparent.png' type='image/x-icon'/ >
+
+	<!-- jQuery Link -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	
+	<!-- Materialize Icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Materialize CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+	<!-- Materialize JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+
+	<!-- Our CSS -->
+	<link rel="stylesheet" href="assets/css/leaflet.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper container">
+				<ul>
+					<a href="index.html" class="brand-logo grey-text text-darken-3">
+						<img src="assets/images/logo-transparent.png" id="logo">
+					</a>
+
+					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons grey-text text-darken-3">menu</i></a>
+				</ul>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
+					<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
+					<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
+					<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
+					<li><a href="http://www.chicityclerk.com/community-affairs/claims" target="_blank" class="grey-text text-darken-3">File a Claim</a></li>
+				</ul>
+				<ul class="side-nav" id="mobile-demo">
+					<li><a href="about.html" class="grey-text text-darken-3">About</a></li>
+					<li><a href="crew.html" class="grey-text text-darken-3">Meet the Crew</a></li>
+					<li><a href="contact.html" class="grey-text text-darken-3">Contact Us</a></li>
+					<li><a href="https://www.cityofchicago.org/city/en/depts/cdot/provdrs/street/svcs/report_a_pot_holeinstreet.html" target="_blank" class="grey-text text-darken-3">Report a Pothole</a></li>
+					<li><a href="http://www.chicityclerk.com/community-affairs/claims" target="_blank" class="grey-text text-darken-3">File a Claim</a></li>
+				</ul>
+				<a href="index.html"><i class="right material-icons grey-text text-darken-3">search</i></a>
+			</div>
+		</nav>
+	</header>
+	<br><br>
+	
+	<main class="row">
+		<section class="col s8 offset-s2 contact">
+			<h4>Contact Us</h4>
+			<br>
+
+			<form>
+				<div class="input-field">
+					<i class="material-icons prefix">account_circle</i>
+					<input id="icon_prefix" type="text" class="validate">
+					<label for="icon_prefix">First Name</label>
+				</div>
+				<div class="input-field">
+					<i class="material-icons prefix">phone</i>
+					<input id="icon_telephone" type="tel" class="validate">
+					<label for="icon_telephone">Telephone</label>
+				</div>
+				<div class="input-field">
+					<i class="material-icons prefix">message</i>
+					<textarea id="icon_message" class="materialize-textarea"></textarea>
+					<label for="icon_message">Message</label>
+				</div><br>
+
+				<button class="btn waves-effect waves-light" type="submit" name="action" id="contact-submit">Submit
+					<i class="material-icons right">send</i>
+				</button>
+			</form>
+		</section>
+	</main>     
+
+	<footer class="page-footer">
+		<div class="footer-copyright">
+			<div class="container center">
+				<span class="grey-text text-darken-4">© 2017 <a href="#" class="grey-text text-darken-4">Ali Arfeen</a> | <a href="#" class="grey-text text-darken-4">Zaynaib Giwa</a> | <a href="#" class="grey-text text-darken-4">Kaitlyn Strand</a> | <a href="#" class="grey-text text-darken-4">Jason Terrell</a>
+				</span>
+			</div>
+		</div>
+	</footer>
+
+	<script type="text/javascript">
+		$(".button-collapse").sideNav();
+	</script>
+
+</body>
+</html>

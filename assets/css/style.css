@@ -1,12 +1,11 @@
+* {
+	font-family: 'Roboto Slab', serif;
+}
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-}
-
-
-* {
-	color: #3c3d41!important;
 }
 
 main {
@@ -14,25 +13,44 @@ main {
 }
 
 body {
+    background-image: url("../images/concrete-texture/concrete-texture.png");
 	position: relative;
 }
 
-/*.collapsible,
-.collapsible-header {
-	border-color: gray;
-}*/
-
-.card{
-	display:none;
-
-}
-.footer-copyright {
-	background-color: rgba(255,0,0,1)
+p {
+	font-size: 18px;
 }
 
+nav,
 .nav-wrapper,
 .page-footer {
-	background-color: #B3DDF2;
+	background-color: rgba(179, 221, 242, 1);
+}
+
+#logo {
+	height: auto;
+	width: 100px;
+}
+
+.collection-item {
+	background-color: rgba(0,0,0,0);
+}
+
+.avatar:hover {
+	background-color: #e3f2fd;
+}
+
+.my-history:hover,
+.global-history:hover {
+	background-color: #424242!important;
+}
+
+.footer-copyright {
+	background-color: #ee6e73!important;
+}
+
+.row {
+	width: 90%;
 }
 
 #mapid {
@@ -40,21 +58,10 @@ body {
 	z-index: 1;
 }
 
-#flag {
-	opacity: 0.7;
-	position: absolute;
-	top: 70px;
-	right: 10px;
-	width: 5%;
-	min-width: 30px;
-	height: auto;
-	z-index: 2;
-}
-
 #main-action {
 	position: absolute;
 	top: 10%;
-	left: 20%;
-	width: 60%;
+	left: 10%;
+	width: 80%;
 	z-index: 2;
 }
