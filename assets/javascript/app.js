@@ -306,19 +306,6 @@ function searchBoxVisibility(event) {
 }; // end of function searchBoxVisibility(){}
 
 
-      /*
-      //if the pothole status is completed show green else show red
-      if (dataStatus === "Completed") {
-        //console.log([dataLat, dataLong], "this  is the info")
-        L.marker([dataLat, dataLong], {icon: potholeClosed}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
-        .openPopup();
-      }
-      else {
-        L.marker([dataLat, dataLong], {icon: potholeOpen}).addTo(mymap).bindPopup("<b>" + data[i].street_address + "</b><br>" + data[i].most_recent_action)
-        .openPopup();
-      }
-      */
-
 //zooms into the address that the user puts in the input box
 function zoomUserMatch(match,map){
   
